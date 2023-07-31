@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
+
+button{
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: transparent;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav{
+  box-shadow: 0px 0px 4px 3px rgb(216, 226, 235);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.menu{
+  border: 1px solid black;
+  padding: 10px;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  margin-left: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.HeadMain{
+  box-shadow: 5px 5px 5px 5px grey;
+  width: fit-content;
+  padding: 20px;
+  height: 610px;
+}
+
+.HeadMain button{
+  margin-left: 200px;
+  margin-top: -10px;
+  margin-right: -10px;
+  margin-bottom: -20px;
+  font-size: 30px;
+  border: 1px solid black;
+  background-color: transparent;
+  border-style: none;
+}
+
+.heading{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.heading .sides{
+  margin: 10px;
+  border: 1px solid black;
+  border-style: none;
+  background-color: transparent;
+  font-size: 18px;
+  margin: 25px 10px;
+  text-align: center;
+  box-shadow: 1px 5px 5px 5px rgb(184, 181, 181);
+  padding: 25px 40px;
 }
 
-.App-link {
-  color: #61dafb;
+.log,.reg{
+  border: 1px solid white;
+  box-shadow: 0px 1px 3px 1px grey;
+  margin: 30px;
+  padding: 10px 30px;
+}
+.log{
+  margin-left: 900px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.image{
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: 10px;
 }
+
+
