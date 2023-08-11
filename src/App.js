@@ -1,77 +1,118 @@
 import { useState } from 'react';
-import Login from './Login';
-import Register from './Register';
-import logo from "./logo.webp";
-import Main from './Main';
-import Doctors from './Doctors';
+import Login from './LoginComp/Login';
+import Register from './RegisterComp/Register';
+import Main from './Body/Main';
+import First from './Side Headings/First';
+import Med from "./Side Headings/Medicine";
+import Treat from "./Side Headings/Treat";
+import Doc from "./Side Headings/Doctors";
+import Footer from './FooterComp/Footer';
 import './App.css';
 
 function App() {
 
-  const [sideHead,setSideHead] = useState(<Nav/>);
+  const [sideHead,setSideHead] = useState(false);
   const [icon,setIcon] =useState("close");
   const [mainHead,setMainHead] = useState(<Main/>);
+  const [footer,setFoot] = useState(<Footer/>);
 
   function handleHeads(event){
     if(event.target.name=='menu'){
-      setSideHead(<Heads/>);
+      setSideHead(true);
     }
     else if(event.target.name=='close'){
-      setSideHead(<Nav/>);
+      setSideHead(false);
     }
   }
 
   function handleLogin(){
     setMainHead(<Login/>);
+    setSideHead(false);
   }
 
   function handleRegister(){
-    setMainHead(<Register/>)
+    setMainHead(<Register/>);
+    setSideHead(false);
   }
 
-  function Nav(){
-    return (
-      <nav className='nav'>
-        {/* <img src={logo} className='image' /> */}
-        <div className='navi'>
-          <button onClick={handleHeads} name="menu" class="material-symbols-outlined menu">
-            menu
-          </button>
-          <button className='log' onClick={handleLogin}>Login</button>
-          <button className='reg' onClick={handleRegister}>Register</button>
-        </div>
-      </nav>
-    );
+  function handleMain(){
+    setMainHead(<Main/>);
+    setSideHead(false);
   }
 
-  function handleDoctors(){
-    setSideHead(<Nav/>);
-    setMainHead(<Doctors/>);
+  function handleAid(){
+    setMainHead(<First/>);
+    setSideHead(false);
+  }
+
+  function handleMed(){
+    setMainHead(<Med/>);
+    setSideHead(false);
+  }
+
+  function handleTreat(){
+    setMainHead(<Treat/>);
+    setSideHead(false);
+  }
+
+  function handleDoc(){
+    setMainHead(<Doc/>);
+    setSideHead(false);
   }
 
 
   function Heads(){
     return(
-      <div className='HeadMain'>
+      <div className='sidenav'>
         <button onClick={handleHeads} name='close' className="material-symbols-outlined close">{icon}</button>
         <div className='heading'>
-          <button onClick={handleDoctors} className='sides'>Find Doctors</button>
-          <button className='sides'>Video Conference</button>
-          <button className='sides'>Medicines</button>
-          <button className='sides'>Health Checkup</button>
-          <button className='sides'>Operations</button>
+          <button onClick={handleMain} className='sides'>Home</button>
+          <button onClick={handleAid} className='sides'>First Aid</button>
+          <button onClick={handleMed} className='sides'>Medicine Suggestions</button>
+          <button onClick={handleTreat} className='sides'>Treatment</button>
+          <button onClick={handleDoc} className='sides'>Find Doctors</button>
         </div>
       </div>
     )
   }
 
+  function handleHome(){
+    setMainHead(<Main/>);
+  }
+
+  function handleColor(){
+    document.getElementById("but").style.backgroundColor="blue";
+  }
+  function handleNormal(){
+    document.getElementById("but").style.backgroundColor="white";
+  }
+
+  function handleNormal(){}
+
+  function Nav(){
+    return (
+      <div className='nav'>
+        {/* <img src={logo} className='image' /> */}
+        <div className='navi'>
+          <button onClick={handleHeads} name="menu" class="material-symbols-outlined menu">
+            menu
+          </button>
+          <div className='buttons'>
+            <button className='home' onClick={handleHome}>Home</button>
+            <button className='log' onClick={handleLogin}>Register</button>
+            <button className='reg' onClick={handleRegister}>Login</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
-      <nav>
-        {sideHead}
-      </nav>
+      <Nav/>
+      {sideHead ? <Heads/> :""}
       {mainHead}
+      {footer}
     </div>
   );
 }

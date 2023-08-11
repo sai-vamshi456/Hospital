@@ -1,0 +1,78 @@
+.imp{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px;
+}
+
+.boxes{
+    border: 1px solid white;
+    height: 220px;
+    background-color: white;
+    width: 200px;
+    filter: drop-shadow(0px 2px 10px grey);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.boxes p{
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+.boxes img{
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    border: 1px solid white;
+    background-color: white;
+}
+.image{
+    border-bottom: 1px solid grey;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    align-items: center;
+}
+/* .body-main{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+} */
+.poster{
+    /* align-items: center; */
+    width: 95%;
+    height: 300px;
+    margin: 50px 30px;
+    border: 1px solid rgb(121, 197, 241);
+    background: linear-gradient(to top right,rgb(122, 122, 252),rgb(140, 140, 238),rgb(68, 68, 177),rgb(147, 147, 214),rgb(18, 18, 253));
+    border-radius: 100px;
+}
+
+.poster{
+    display: flex;
+}
+.poster h1{
+    width: 300px;
+    line-height: 150%;
+    margin: 30px 100px;
+    color: whitesmoke;
+}
+.logo-poster{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    transform: rotate(-45deg);
+    margin: 20px;
+}
+
+.doc-img{
+    width: 25%;
+    height: 250px;
+    align-items: center;
+    border-radius: 50px;
+    margin: 30px 100px;
+}
