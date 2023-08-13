@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Login from './LoginComp/Login';
 import Register from './RegisterComp/Register';
 import Main from './Body/Main';
-import First from './Side Headings/First';
-import Med from "./Side Headings/Medicine";
-import Treat from "./Side Headings/Treat";
-import Doc from "./Side Headings/Doctors";
+import First from './Side Headings/FirstAidComp/First';
+import Med from "./Side Headings/MedComp/Medicine";
+import Treat from "./Side Headings/TreatMentComp/Treat";
+import Doc from "./Side Headings/DoctorComp/Doctors";
 import Footer from './FooterComp/Footer';
 import './App.css';
 
@@ -78,13 +78,6 @@ function App() {
 
   function handleHome(){
     setMainHead(<Main/>);
-  }
-
-  function handleColor(){
-    document.getElementById("but").style.backgroundColor="blue";
-  }
-  function handleNormal(){
-    document.getElementById("but").style.backgroundColor="white";
   }
 
   function handleNormal(){}
