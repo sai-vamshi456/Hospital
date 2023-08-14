@@ -1,9 +1,4 @@
-.doc{
-    border: 1px solid blue;
-    margin: 50px;
-    display: flex;
-    justify-content: space-around;
-}
+
 select{
     border: 1px solid white;
     box-shadow: 0px 1px 3px 1px grey;
@@ -20,16 +15,15 @@ input{
     padding: 10px 30px;
     width: 200px;
 }
-.doc button{
-    border: 1px solid white;
-    box-shadow: 0px 1px 3px 1px grey;
-    margin: 20px 40px;
-    padding: 10px 30px;
-}
-.citybox{
+.card{
+    background-color: gray;
     border: 1px solid black;
+    width:200px;
+    margin: 5px;
 }
-.box{
-    font-size: 18px;
-    font-weight: 100;
+.card-rating{
+    display: flex;
+}
+.hide {
+    display: none;
 }

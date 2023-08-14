@@ -1,113 +1,132 @@
 import { useState } from 'react';
 import Login from './LoginComp/Login';
-import Register from './RegisterComp/Register';
 import Main from './Body/Main';
-import First from './Side Headings/FirstAidComp/First';
-import Med from "./Side Headings/MedComp/Medicine";
-import Treat from "./Side Headings/TreatMentComp/Treat";
-import Doc from "./Side Headings/DoctorComp/Doctors";
-import Footer from './FooterComp/Footer';
+import { Link } from 'react-router-dom';
+import Footer from './FooterComp/Footer'
+import {onAuthStateChanged} from "firebase/auth";
+import { useStateValue } from "./stateProvider";
 import './App.css';
-
+import {auth} from "./firebase";
+import { useEffect } from "react";
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import {signOut} from "firebase/auth";
+import Doctors from "./Side Headings/Doctors";
+import DoctorPage from "./DoctorPage";
 function App() {
+  const [{user},dispatch]=useStateValue();
 
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+     // User is signed in, see docs for a list of available properties
+     console.log("user");
+     if(user){
+        dispatch({
+         type:'SET_USER',
+         user:user
+        })
+     }
+     else{
+       dispatch({
+         type:'SET_USER',
+         user:null
+        })
+     } 
+    });
+    },[]);
+  function handleAuth(){
+    if(user)
+    {
+        
+        signOut(auth);
+
+    }
+     
+   }
   const [sideHead,setSideHead] = useState(false);
-  const [icon,setIcon] =useState("close");
-  const [mainHead,setMainHead] = useState(<Main/>);
-  const [footer,setFoot] = useState(<Footer/>);
-
+  function Nav(){
+      return (
+        <div className='nav'>
+          
+          
+            <button  name="menu" onClick={handleHeads} class="material-symbols-outlined menu">
+              menu
+            </button>
+            
+            <div className='buttons'>
+              <Link to="/">
+              <button className='home' >Home</button>
+              </Link>
+              <div className='userName' >
+                <span >Hello {user?user.email:"guest"}</span>
+                
+              </div>
+              <Link to={!user && '/login'} >
+                <button className='reg' onClick={handleAuth}>{user ? 'signOut':'signIn'}</button>
+              </Link>
+            
+          </div>
+        </div>
+      );
+    }
+    
   function handleHeads(event){
-    if(event.target.name=='menu'){
+    if(event.target.name==='menu'){
       setSideHead(true);
     }
-    else if(event.target.name=='close'){
+    else if(event.target.name==='close'){
       setSideHead(false);
     }
   }
 
-  function handleLogin(){
-    setMainHead(<Login/>);
-    setSideHead(false);
-  }
-
-  function handleRegister(){
-    setMainHead(<Register/>);
-    setSideHead(false);
-  }
-
-  function handleMain(){
-    setMainHead(<Main/>);
-    setSideHead(false);
-  }
-
-  function handleAid(){
-    setMainHead(<First/>);
-    setSideHead(false);
-  }
-
-  function handleMed(){
-    setMainHead(<Med/>);
-    setSideHead(false);
-  }
-
-  function handleTreat(){
-    setMainHead(<Treat/>);
-    setSideHead(false);
-  }
-
-  function handleDoc(){
-    setMainHead(<Doc/>);
-    setSideHead(false);
-  }
-
+ 
 
   function Heads(){
     return(
       <div className='sidenav'>
-        <button onClick={handleHeads} name='close' className="material-symbols-outlined close">{icon}</button>
+        <button name='close' onClick={handleHeads}className="material-symbols-outlined close">X</button>
         <div className='heading'>
-          <button onClick={handleMain} className='sides'>Home</button>
-          <button onClick={handleAid} className='sides'>First Aid</button>
-          <button onClick={handleMed} className='sides'>Medicine Suggestions</button>
-          <button onClick={handleTreat} className='sides'>Treatment</button>
-          <button onClick={handleDoc} className='sides'>Find Doctors</button>
+        
+          <Link to="/">
+              <button  className='sides'>Home</button>
+            </Link>
+            <Link to="/firstaid">
+              <button  className='sides'>First Aid</button>
+            </Link>
+            <Link to="/">
+              <button className='sides'>Medicine Suggestions</button>
+            </Link>
+            <Link to="/">
+              <button  className='sides'>Treatment</button>
+            </Link>
+            <Link to="/finddoctor">
+              <button className='sides'>Find Doctors</button>
+            </Link>          
         </div>
       </div>
     )
   }
 
-  function handleHome(){
-    setMainHead(<Main/>);
-  }
+  
+ 
 
-  function handleNormal(){}
-
-  function Nav(){
-    return (
-      <div className='nav'>
-        {/* <img src={logo} className='image' /> */}
-        <div className='navi'>
-          <button onClick={handleHeads} name="menu" class="material-symbols-outlined menu">
-            menu
-          </button>
-          <div className='buttons'>
-            <button className='home' onClick={handleHome}>Home</button>
-            <button className='log' onClick={handleLogin}>Register</button>
-            <button className='reg' onClick={handleRegister}>Login</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  
 
   return (
     <div className="App">
-      <Nav/>
-      {sideHead ? <Heads/> :""}
-      {mainHead}
-      {footer}
+      <Router>
+        <Routes>
+          <Route path="/" element ={[<Nav /> ,sideHead?<Heads/>:"",<Main />,<Footer />]}></Route>
+          <Route  path="/login" element={[<Login />]}></Route>
+          <Route path="/finddoctor" element={[<Nav />,<Doctors />]}></Route>
+          <Route path="/finddoctor/doctorpage" element={[<Nav />,<DoctorPage />]}></Route>
+         </Routes>
+      </Router>
+     
     </div>
   );
 }
 
 export default App;
+// {}
+// {mainHead}
+// {footer}
