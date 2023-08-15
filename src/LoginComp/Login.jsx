@@ -3,11 +3,17 @@ import {createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "fireba
 import {auth} from "../firebase";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 export default function Register(){
-
+  useEffect(()=>{
+    AOS.init({duration:2000});
+},[])
    const [email,updateEmail]=useState('');
    const [password,updatePassword]=useState('');
    const history = useNavigate();  
+   const [msg,setMsg] = useState("");
   function signin(event){
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -40,26 +46,37 @@ export default function Register(){
       
     });
   }
+  const checkValidation=()=>{
+    const rgExp = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2-6}$/
+    if(rgExp.test(email)){
+        setMsg("Email is Valid");
+    }
+    else if(email===""){
+        setMsg("Please enter Email");
+    }
+    else if(!rgExp.test(email)){
+        setMsg("Email is not valid");
+    }
+    else{
+        setMsg("");
+    }
+}
     return (
-       <div className="register">
-          
-       <form >
-       <div className="details">
-           <label>Email : </label><br/>
-           <input type="text" value={email} onChange={e=>updateEmail(e.target.value)}/><br/>
-       </div>
-       <div className="details">
-           <label>Password : </label><br/>
-           <input type="password" value={password} onChange={e=>updatePassword(e.target.value)}/><br/>
-       </div>
-       <button type="submit" onClick={signin}>Sign in</button>
-      </form>
-      <p>
-       By signing-in you agree to the heal-well  Conditions . Please
-       see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.
-       </p>
-       <button className='registerbtn'  onClick={Register}>Create Your heal-well Account</button>
-       </div>
+      <form className="register" data-aos="fade-up" onSubmit={checkValidation}>
+            <div className="details">
+                <label>Email : <p>{msg}</p> </label><br/>
+                <input type="text" value={email} onChange={e=>updateEmail(e.target.value)}/><br/>
+            </div>
+            <div className="details">
+                <label>Password : </label><br/>
+                <input type="password" value={password} onChange={e=>updatePassword(e.target.value)}/><br/>
+            </div>
+            {/* <Link to="/"> */}
+            <button type="submit" onClick={signin}>Sign in</button>
+            <button className='registerbtn'  onClick={Register}>Create Your heal-well Account</button>
+            {/* </Link> */}
+        </form>
+       
     )
 }
 

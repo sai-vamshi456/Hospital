@@ -1,39 +1,65 @@
 import "./Footer.css";
-import face from "./face.jfif";
-import link from "./link.png";
-import insta from "./insta.png";
-import tweet from "./tweet.png";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import CallRoundedIcon from '@mui/icons-material/CallRounded';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+
 export default function Footer(){
+
+    useEffect(()=>{
+        AOS.init({duration:2000});
+    },[])
+
     return (
-        <footer className="foot">
-            <div className="img">
-                <h4>Instagram</h4>
-                <a href="" target="_blank">
-                    <img src={insta}/>
-                </a>
-            </div>
-            <div className="img">
-                <h4>Twitter</h4>
-                <a href="" target="_blank">                    
-                    <img src={tweet}/>
-                </a>
-            </div>
-            <div className="img">
-                <h4>FaceBook</h4>
-                <a href="" target="_blank">                    
-                    <img src={face}/>
-                </a>
-            </div>
-            <div className="img">
-                <h4>Linked in</h4>
-                <a href="" target="_blank">                    
-                    <img src={link}/>
-                </a>
-            </div>
-            <div className="contact">
-                <span class="material-symbols-outlined">call</span>
-                <h4>Contact Us: +91 465264574</h4>
-            </div>
+        <footer className="foot" data-aos="fade-down">
+            <div className="foot-top">
+                <div className="foot-left">
+                    <div className="img">
+                        <a href="" target="_blank">
+                           <InstagramIcon sx={{
+                            color: "white",
+                              fontSize: "40px",
+                                "&:hover": { color: "blue"},
+                        }}/>
+                        </a>
+                    </div>
+                    <div className="img">
+                        <a href="" target="_blank">                    
+                            <TwitterIcon sx={{
+                                color: "white",
+                                  fontSize: "40px",
+                                    "&:hover": { color: "blue"},
+                            }}/>
+                        </a>
+                    </div>
+                    <div className="img">
+                        <a href="" target="_blank">                    
+                            <FacebookIcon sx={{
+                                color: "white",
+                                  fontSize: "40px",
+                                    "&:hover": { color: "blue"},
+                            }}/>
+                        </a>
+                    </div>
+                    <div className="img">
+                        <a href="" target="_blank">                    
+                           
+                        </a>
+                    </div>
+                </div>
+                <div className="foot-right">
+                    <div className="contact">
+                        <CallRoundedIcon />
+                        <h4>Contact Us: +91 465264574</h4>
+                    </div>
+                </div>
+            </div>  
+            <div className="foot-bottom">
+                <p>Copyright @2023</p>
+            </div>  
         </footer>
     );
 }

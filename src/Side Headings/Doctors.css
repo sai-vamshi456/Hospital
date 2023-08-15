@@ -1,4 +1,10 @@
-
+.doc{
+    border: 1px solid blue;
+    margin: 50px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
 select{
     border: 1px solid white;
     box-shadow: 0px 1px 3px 1px grey;
@@ -15,14 +21,60 @@ input{
     padding: 10px 30px;
     width: 200px;
 }
-.card{
-    background-color: gray;
-    border: 1px solid black;
-    width:200px;
-    margin: 5px;
+.doc button{
+    border: 1px solid white;
+    box-shadow: 0px 1px 3px 1px grey;
+    margin: 20px 40px;
+    padding: 10px 30px;
 }
-.card-rating{
+.box h3,h4{
+    font-weight: 100;
+}
+.citybox{
+    border: 1px solid black;
+}
+.card{
+    font-size: 18px;
+    font-weight: 100;
+    border: 1px solid black;
+    margin: 20px;
+    padding: 10px;
+    width: 200px;
+    align-items: center;
+    text-align: center;
+}
+.card h3{
+    font-weight: 100;
+}
+
+.doc-main{
     display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+.up-list{
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    text-align: center;
+}
+.list{
+    text-align: center;
+    margin: 30px;
+    width: 200px;
+}
+
+
+/* .checkoutProduct__rating {
+    display: flex;
+} */
+
+.checkoutProduct {
+    display: flex;
+    border: 2px solid black;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .hide {
     display: none;

@@ -12,7 +12,15 @@ import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import {signOut} from "firebase/auth";
 import Doctors from "./Side Headings/Doctors";
 import DoctorPage from "./DoctorPage";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function App() {
+
+  useEffect(()=>{
+      AOS.init({duration:2000});
+  },[])
+
+  const [sideHead,setSideHead] = useState(false);
   const [{user},dispatch]=useStateValue();
 
   useEffect(()=>{
@@ -42,91 +50,101 @@ function App() {
     }
      
    }
-  const [sideHead,setSideHead] = useState(false);
-  function Nav(){
-      return (
-        <div className='nav'>
-          
-          
-            <button  name="menu" onClick={handleHeads} class="material-symbols-outlined menu">
-              menu
-            </button>
-            
-            <div className='buttons'>
-              <Link to="/">
-              <button className='home' >Home</button>
-              </Link>
-              <div className='userName' >
-                <span >Hello {user?user.email:"guest"}</span>
-                
-              </div>
-              <Link to={!user && '/login'} >
-                <button className='reg' onClick={handleAuth}>{user ? 'signOut':'signIn'}</button>
-              </Link>
-            
-          </div>
-        </div>
-      );
-    }
-    
   function handleHeads(event){
-    if(event.target.name==='menu'){
+    if(event.target.name=='menu' || event.target.name=='sideheading'){
       setSideHead(true);
     }
-    else if(event.target.name==='close'){
+    else if(event.target.name=='close'){
       setSideHead(false);
     }
   }
 
- 
+  function handleSideHeads(event){
+    setSideHead(!sideHead);
+  }
+
 
   function Heads(){
     return(
-      <div className='sidenav'>
-        <button name='close' onClick={handleHeads}className="material-symbols-outlined close">X</button>
-        <div className='heading'>
-        
+      <div className='sidenav' data-aos="zoom">
+        <Link to="/">
+          <button onClick={handleHeads} data-aos="fade-down" name='close' className="material-symbols-outlined close">close</button>
+        </Link>
+        <div className='heading' data-aos="fade-up">
           <Link to="/">
-              <button  className='sides'>Home</button>
-            </Link>
-            <Link to="/firstaid">
-              <button  className='sides'>First Aid</button>
-            </Link>
-            <Link to="/">
-              <button className='sides'>Medicine Suggestions</button>
-            </Link>
-            <Link to="/">
-              <button  className='sides'>Treatment</button>
-            </Link>
-            <Link to="/finddoctor">
-              <button className='sides'>Find Doctors</button>
-            </Link>          
+            <button onClick={handleSideHeads} name='sideheading' className='sides'>Home</button>
+          </Link>
+          <Link to="/firstaid">
+            <button onClick={handleSideHeads} name='sideheading' className='sides'>First Aid</button>
+          </Link>
+          <Link to="/medicine">
+            <button onClick={handleSideHeads} name='sideheading' className='sides'>Medicine Suggestions</button>
+          </Link>
+          <Link to="/treatment">
+            <button onClick={handleSideHeads} name='sideheading' className='sides'>Treatment</button>
+          </Link>
+          <Link to="/finddoctor">
+            <button onClick={handleSideHeads} name='sideheading' className='sides'>Find Doctors</button>
+          </Link>
+          
         </div>
       </div>
     )
   }
 
-  
- 
+  const [icon,setIcon]= useState("light_mode");
 
-  
+  function handleModes(){
+    if(icon==="light_mode"){
+      setIcon("dark_mode");
+    }
+    else{
+      setIcon("light_mode");
+    }
+  }
+
+  function Nav(){
+    return (
+      <div className='nav'>
+        <div className='navi'>
+          <Link to="/heads">
+            <button onClick={handleHeads} name="menu" class="material-symbols-outlined menu">
+              menu
+            </button>
+          </Link>
+          <div className='buttons'>
+          
+             <span >Hello {user?user.email:"guest"}</span>
+          
+         
+              
+            
+            <Link to={!user && '/login'} >
+               <button className='reg' onClick={handleAuth}>{user ? 'signOut':'signIn'}</button>
+            </Link>
+            <span onClick={handleModes} class="material-symbols-outlined theme">{icon}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element ={[<Nav /> ,sideHead?<Heads/>:"",<Main />,<Footer />]}></Route>
-          <Route  path="/login" element={[<Login />]}></Route>
-          <Route path="/finddoctor" element={[<Nav />,<Doctors />]}></Route>
-          <Route path="/finddoctor/doctorpage" element={[<Nav />,<DoctorPage />]}></Route>
-         </Routes>
+          <Route>
+            <Route path="/" element ={[<Nav /> ,sideHead?<Heads/>:"", <Main />, <Footer />]}></Route>
+            <Route path="/login" element={[<Login />]}></Route>
+           
+            <Route path='/heads' element={[<Nav /> ,sideHead?<Heads/>:""]}></Route>
+            <Route path="/finddoctor" element={[<Nav />,<Doctors />]}></Route>
+             <Route path="/finddoctor/doctorpage" element={[<Nav />,<DoctorPage />]}></Route>
+          </Route>
+        </Routes>
       </Router>
-     
     </div>
   );
 }
 
 export default App;
-// {}
-// {mainHead}
-// {footer}

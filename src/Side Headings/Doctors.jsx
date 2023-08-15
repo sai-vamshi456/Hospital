@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 function Doctor() {
   const [cityName, ucity] = useState("");
   const [specialization, uspecialization] = useState("");
-  const [{ doctor }, dispatch] = useStateValue();
+  const [{ doctor,user }, dispatch] = useStateValue();
   function handleSpec(event) {
     uspecialization(event.target.value);
   }
@@ -17,7 +17,7 @@ function Doctor() {
       doctor:ids
     });
     
-    alert(ids.name);
+    
   }
   function Card(props) {
     console.log(props.rating);
@@ -31,18 +31,10 @@ function Doctor() {
           {props.specialization}
         </p>
         <p>{props.location}</p>
-        <div className="rating">
-          {Array(props.rating)
-            .fill()
-            .map((_, i) => (
-             <p>
-                ❤️
-              </p>
-            ))}
-        </div>
-        <Link to="/finddoctor/doctorpage">
+        
+        <Link to={user && "/finddoctor/doctorpage"}>
            <button onClick={() => handleAppointment(props.ids)}>
-            book a appointment
+           {user? "book a appointment":"Login to book appointemnt "}
           </button>
         </Link>
       </div>
@@ -112,7 +104,7 @@ function Doctor() {
         </select>
 
         <button onClick={handleDoctor} type="submit">
-          S
+          Search
         </button>
       </form>
 

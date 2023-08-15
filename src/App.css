@@ -11,13 +11,23 @@ button{
   background-color: transparent;
 }
 
+.buttons .theme{
+  font-size: 30px;
+  margin-right: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.buttons .theme:click{
+    background-color: black;
+    color: white;
+}
+
 .nav{
-  display: flex;
   margin: -5px -5px;
   box-shadow: 0px 0px 4px 3px rgb(216, 226, 235);
   height: 80px;
 }
-
 .sidenav{
   width: fit-content;
   z-index: 1;
@@ -71,6 +81,7 @@ button{
   text-align: center;
   box-shadow: 1px 5px 5px 5px rgb(184, 181, 181);
   padding: 25px 40px;
+  width: 250px;
 }
 
 .log,.reg,.home{
@@ -86,7 +97,6 @@ button{
   cursor: pointer;
 }
 .buttons{
-  display:flex;
   float: right;
 }
 .home:hover{
@@ -109,6 +119,10 @@ button{
   color: white;
   box-shadow: inset 1px 2px 10px rgb(105, 105, 182);
 }
-.userName{
-  margin-top:30px ;
-}
+
+
+
+
+
+
+
