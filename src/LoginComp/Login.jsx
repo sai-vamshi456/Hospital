@@ -62,7 +62,7 @@ export default function Register(){
     }
 }
     return (
-      <form className="register" data-aos="fade-up" onSubmit={checkValidation}>
+      <form className="register" data-aos="fade-up" >
             <div className="details">
                 <label>Email : <p>{msg}</p> </label><br/>
                 <input type="text" value={email} onChange={e=>updateEmail(e.target.value)}/><br/>
