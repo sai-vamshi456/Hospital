@@ -5,15 +5,19 @@ import { Link } from 'react-router-dom';
 import Footer from './FooterComp/Footer'
 import {onAuthStateChanged} from "firebase/auth";
 import { useStateValue } from "./stateProvider";
+import User from './User';
 import './App.css';
 import {auth} from "./firebase";
 import { useEffect } from "react";
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import {signOut} from "firebase/auth";
-import Doctors from "./Side Headings/Doctors";
-import DoctorPage from "./DoctorPage";
+import Doctors from "./Side Headings/DoctorComp/Doctors";
+import DoctorPage from "./Side Headings/DoctorComp/DoctorPage";
+import Treat from './Side Headings/TreatMentComp/Treat';
+import Medicine from './Side Headings/MedComp/Medicine';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Appointment from './Side Headings/DoctorComp/Appointment';
 function App() {
 
   useEffect(()=>{
@@ -44,17 +48,17 @@ function App() {
   function handleAuth(){
     if(user)
     {
-        
+
         signOut(auth);
 
     }
      
    }
   function handleHeads(event){
-    if(event.target.name=='menu' || event.target.name=='sideheading'){
+    if(event.target.name==='menu' || event.target.name==='sideheading'){
       setSideHead(true);
     }
-    else if(event.target.name=='close'){
+    else if(event.target.name==='close'){
       setSideHead(false);
     }
   }
@@ -80,7 +84,7 @@ function App() {
           <Link to="/medicine">
             <button onClick={handleSideHeads} name='sideheading' className='sides'>Medicine Suggestions</button>
           </Link>
-          <Link to="/treatment">
+          <Link to="/treat">
             <button onClick={handleSideHeads} name='sideheading' className='sides'>Treatment</button>
           </Link>
           <Link to="/finddoctor">
@@ -103,6 +107,15 @@ function App() {
     }
   }
 
+  function UserDetails(){
+    return (
+      <div>
+        <button>sign out</button>
+        {/* <span style={{border:"none"}} class="material-symbols-outlined">menu</span> */}
+      </div>
+    )
+  }
+
   function Nav(){
     return (
       <div className='nav'>
@@ -113,17 +126,13 @@ function App() {
             </button>
           </Link>
           <div className='buttons'>
-          
-             <span >Hello {user?user.email:"guest"}</span>
-          
-         
-              
-            
-            <Link to={!user && '/login'} >
-               <button className='reg' onClick={handleAuth}>{user ? 'signOut':'signIn'}</button>
+            <Link to="/User">
+             <button style={{marginTop:"20px"}} >Hello {user?user.email:"guest"}</button>
             </Link>
-            <span onClick={handleModes} class="material-symbols-outlined theme">{icon}</span>
-          </div>
+            <Link to={!user && '/login'} >
+               <span className='reg' onClick={handleAuth}>{user ? <UserDetails/>:'signIn'}</span>
+            </Link>
+         </div>
         </div>
       </div>
     );
@@ -133,14 +142,18 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route>
-            <Route path="/" element ={[<Nav /> ,sideHead?<Heads/>:"", <Main />, <Footer />]}></Route>
-            <Route path="/login" element={[<Login />]}></Route>
-           
-            <Route path='/heads' element={[<Nav /> ,sideHead?<Heads/>:""]}></Route>
-            <Route path="/finddoctor" element={[<Nav />,<Doctors />]}></Route>
-             <Route path="/finddoctor/doctorpage" element={[<Nav />,<DoctorPage />]}></Route>
-          </Route>
+            <Route>
+                <Route path="/" element ={[<Nav /> ,sideHead? <Heads/>:"", <Main />, <Footer />]}></Route>
+                <Route path="/login" element={[<Nav/>,<Login />]}></Route>
+                <Route path='/heads' element={[<Nav /> ,sideHead?<Heads/>:""]}></Route>
+                <Route path='/treat' element={[<Nav/>,<Treat/>]}></Route>
+                <Route path="/finddoctor" element={[<Nav />,<Doctors />]}></Route>
+                <Route path="/finddoctor/doctorpage" element={[<Nav />,<DoctorPage />]}></Route>
+                <Route path="/finddoctor/appoint" element={[<Nav/>,<Appointment/>]} ></Route>
+                <Route path='/medicine' element={[<Nav/>,<Medicine/>]}></Route>
+                <Route path='/' element={[<Nav/>]}></Route>
+                <Route path='/User' element={[<Nav/>,<User/>]}></Route>
+            </Route>
         </Routes>
       </Router>
     </div>

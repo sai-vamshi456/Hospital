@@ -47,7 +47,7 @@ export default function Register(){
     });
   }
   const checkValidation=()=>{
-    const rgExp = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2-6}$/
+    const rgExp = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2-6}$/;
     if(rgExp.test(email)){
         setMsg("Email is Valid");
     }

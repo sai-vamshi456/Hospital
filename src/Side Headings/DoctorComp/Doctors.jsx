@@ -1,7 +1,7 @@
 import { useState } from "react";
-import doctors from "../doctorList";
+import doctors from "./doctorList";
 import "./Doctors.css";
-import { useStateValue } from "../stateProvider";
+import { useStateValue } from "../../stateProvider";
 import { useNavigate } from 'react-router-dom';
 import {Link} from "react-router-dom";
 function Doctor() {
@@ -31,12 +31,15 @@ function Doctor() {
           {props.specialization}
         </p>
         <p>{props.location}</p>
-        
-        <Link to={user && "/finddoctor/doctorpage"}>
+        <Link to="/finddoctor/appoint">
+          <button>Book a appointment</button>
+        </Link>
+
+        {/* <Link to={user && "/finddoctor/doctorpage"}>
            <button onClick={() => handleAppointment(props.ids)}>
            {user? "book a appointment":"Login to book appointemnt "}
           </button>
-        </Link>
+        </Link> */}
       </div>
     );
   }
@@ -107,16 +110,17 @@ function Doctor() {
           Search
         </button>
       </form>
-
-      {doctors.map((doc) => (
-        <Card
-          ids={doc}
-          name={doc.name}
-          location={doc.location}
-          specialization={doc.specialization}
-          rating={doc.rating}
-        />
-      ))}
+      <div style={{display:"flex"}}>
+        {doctors.map((doc) => (
+          <Card
+            ids={doc}
+            name={doc.name}
+            location={doc.location}
+            specialization={doc.specialization}
+            rating={doc.rating}
+          />
+        ))}
+      </div>
     </>
   );
 }

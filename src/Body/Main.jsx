@@ -37,7 +37,7 @@ export default function Main(){
             </div>
             <div className="imp" data-aos="fade-down">
                 <Link to="/finddoctor">
-                <Box img={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZfgZ7gJLtqdC0hby93kal4lP4IIsrfJ880g&usqp=CAU"} alter="Near Doctors" name="Doctors near You" />
+                    <Box img={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZfgZ7gJLtqdC0hby93kal4lP4IIsrfJ880g&usqp=CAU"} alter="Near Doctors" name="Doctors near You" />
                 </Link>
                 <Box img={"https://media.istockphoto.com/id/1215835575/vector/medicine-first-aid-kit.jpg?s=612x612&w=0&k=20&c=L-AcsFJAG2QfO5vg0qPl2_NhH9IRwYkhHUoofqpzkMI="} alter="First Aid" name="First Aid"  />
                 <Box img={medicine} alter="Tablets" name="Medicines used according to issue" />    
